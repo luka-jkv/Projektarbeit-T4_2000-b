@@ -4,7 +4,7 @@ This repository contains the LaTeX source files for my T4_2000 A project work. T
 
 ## Project Overview
 
-- **Thesis Topic:** Migrierung von Versionsverwaltungssystemen und die damit verbundene Automatisierung der Releasedateien
+- **Thesis Topic:** Implementierung einer BLE-Advertisement-Funktion für einen Shelly-Smart-Stecker zur drahtlosen Statusüberwachung
 - **Main Sections:**
     - Einleitung
     - 
