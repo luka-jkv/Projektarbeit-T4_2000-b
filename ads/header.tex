@@ -1,0 +1,304 @@
+%!TEX root = ../dokumentation.tex
+
+\usepackage{scrhack}
+
+%Seitengroesse
+\usepackage{fullpage}
+
+%Zeilenumbruch und mehr
+\usepackage[activate]{microtype}
+
+% Zeichencodierung
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{pifont}
+
+% Zeilenabstand
+\usepackage[onehalfspacing]{setspace}
+
+% Index-Erstellung
+\usepackage{makeidx}
+
+% Lokalisierung (neue deutsche Rechtschreibung)
+\usepackage[ngerman]{babel}
+
+% Anführungszeichen 
+\usepackage[babel,german=quotes]{csquotes}
+%\usepackage[style=swiss]{csquotes}
+
+% Spezielle Tabellenform fuer Deckblatt
+\usepackage{longtable}
+\setlength{\tabcolsep}{10pt} %Abstand zwischen Spalten
+\renewcommand{\arraystretch}{1.5} %Zeilenabstand
+\usepackage{tabularray}
+
+% Grafiken
+\usepackage{graphicx}
+\usepackage{fancybox}
+\usepackage{caption}
+\usepackage{subcaption}
+\captionsetup{figurename=Abb.}
+\setlength{\fboxsep}{0pt}
+
+% Mathematische Textsaetze
+%\usepackage{amsmath}
+%\usepackage{amssymb}
+\usepackage{fdsymbol}
+
+% Farben
+\usepackage{soul}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{LinkColor}{rgb}{0,0,0.2}
+\definecolor{normalgreen}{RGB}{0,160,0}
+\definecolor{ListingBackground}{rgb}{0.92,0.92,0.92}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.97}
+\definecolor{egruen}{rgb}{0,0.37647,0.4}
+
+\definecolor{darkblue}{RGB}{0,29,188}
+\definecolor{darkred}{RGB}{178,0,0}
+
+\definecolor{plotred}{HTML}{AB0000}
+\definecolor{plotblue}{HTML}{0000AB}
+\definecolor{plotgreen}{HTML}{00AB00}
+
+\input{ads/daten_arbeit.tex}
+
+% Titel, Autor und Datum
+\title{\titel}
+\author{\autor}
+\date{\datum}
+
+% PDF Einstellungen
+\usepackage[%
+	pdftitle={\pdftitel},
+	pdfauthor={\autor},
+	pdfsubject={\arbeit},
+	pdfcreator={pdflatex, LaTeX with KOMA-Script},
+	pdfpagemode=UseOutlines, % Beim Oeffnen Inhaltsverzeichnis anzeigen
+	pdfdisplaydoctitle=true, % Dokumenttitel statt Dateiname anzeigen.
+	pdflang=de % Sprache des Dokuments.
+]{hyperref} 
+
+% (Farb-)einstellungen für die Links im PDF
+\hypersetup{
+	colorlinks=false, % De-/Aktivieren von farbigen Links im Dokument
+  pdfborder={0 0 0}
+	%linkcolor=LinkColor, % Farbe festlegen
+	%citecolor=LinkColor,
+	%filecolor=LinkColor,
+	%menucolor=LinkColor,
+	%urlcolor=LinkColor,
+	%bookmarksnumbered=true % Überschriftsnummerierung im PDF Inhalt anzeigen.
+}
+
+% autoref Bezeichnungen anpassen
+\addto\extrasngerman{\def\subsectionautorefname{Abschnitt}}
+\addto\extrasngerman{\def\subsubsectionautorefname{Abschnitt}}
+
+% Verschiedene Schriftarten
+%\usepackage{goudysans}
+%\usepackage{lmodern}
+%\usepackage{libertine}
+\usepackage{palatino} 
+
+% Hurenkinder und Schusterjungen verhindern
+% http://projekte.dante.de/DanteFAQ/Silbentrennung
+\clubpenalty=10000
+\widowpenalty=10000
+\displaywidowpenalty=10000
+
+\usepackage[babel,german=quotes]{csquotes}         % Deutsche Anführungszeichen + Zitate
+
+\usepackage[
+	backend = biber,                % Verweis auf biber
+	language = auto,
+	style = numeric,             % Nummerierung der Quellen mit Zahlen
+        defernumbers=true,
+	sorting = none,                 % none = Sortierung nach der Erscheinung im Dokument
+    %nty
+	sortcites = true,               % Sortiert die Quellen innerhalb eines cite-Befehls
+	block = space,                  % Extra Leerzeichen zwischen Blocks
+	hyperref = true,                % Links sind klickbar auch in der Quelle
+	%backref = true,                % Referenz, auf den Text an die zitierte Stelle
+	bibencoding = auto,
+	giveninits = true,              % Vornamen werden abgekürzt
+	doi=false,                      % DOI nicht anzeigen
+	isbn=true,                     % ISBN anzeigen
+    alldates=short                  % Datum immer als DD.MM.YYYY anzeigen
+]{biblatex}
+\addbibresource{ArbeitBib.bib}
+\newcommand*{\quelle}[1]{\par\raggedleft\footnotesize Quelle:~#1}
+\setcounter{biburlnumpenalty}{3000}     % Umbruchgrenze für Zahlen
+\setcounter{biburlucpenalty}{6000}      % Umbruchgrenze für Großbuchstaben
+\setcounter{biburllcpenalty}{9000}      % Umbruchgrenze für Kleinbuchstaben
+\DeclareNameAlias{default}{family-given}  % Nachname vor dem Vornamen
+\AtBeginBibliography{\renewcommand{\multinamedelim}{\addslash\space
+}\renewcommand{\finalnamedelim}{\multinamedelim}}  % Schrägstrich zwischen den Autorennamen
+\DefineBibliographyStrings{german}{
+  urlseen = {Abruf:},                      % Ändern des Titels von "besucht am"
+}
+% Befehl zur Anpassung der Titeldarstellung
+\DeclareFieldFormat[article, inbook, incollection, inproceedings, misc, thesis, unpublished]{title}{\normalfont\textbf{#1}}
+% Befehl zur Anpassung der Titeldarstellung für Bücher
+\DeclareFieldFormat[book]{title}{\normalfont\textbf{#1}}
+
+% Quellcode
+\input{ads/owncodestyle.tex}
+
+
+
+%Akronyme
+\usepackage[printonlyused,footnote]{acronym}
+% Definiere neuen Zeilenabstand für die acronym-Umgebung
+\AtBeginEnvironment{acronym}{\setlength{\baselineskip}{1.15\baselineskip}}
+
+% Fussnoten
+\usepackage[perpage, hang, multiple, stable]{footmisc}
+
+%Bildpfad
+\graphicspath{{images/}}
+
+\DeclareTOCStyleEntries[indent=0pt, numwidth=3.0em]{tocline}{figure,table}
+
+%nur ein latex-Durchlauf für die Aktualisierung von Verzeichnissen nötig
+\usepackage{bookmark}
+
+%Gleitumgebungen (Bilder, Tabellen, usw\ldots) lassen sich mit H an genau der
+% definierten Stelle platzieren
+\usepackage{float}
+
+% für die vertikale Platzierung von Text in Tabellen
+\usepackage{array}
+
+% für die Darstellung des Euro-Symbols
+\usepackage[right]{eurosym}
+
+% für textumflossene Grafiken
+\usepackage{wrapfig}
+
+\usepackage[font={color=egruen,footnotesize}, labelfont={color=egruen},
+  labelsep=space]{caption}
+
+% eine Kommentarumgebung "k" (Handhabe mit \begin{k}<Kommentartext>\end{k},
+% Kommentare werden rot gedruckt). Wird \% vor excludecomment{k} entfernt,
+% werden keine Kommentare mehr gedruckt.
+\usepackage{comment}
+\specialcomment{k}{\begingroup\color{red}}{\endgroup}
+%\excludecomment{k}
+\addtokomafont{disposition}{\color{egruen}}
+
+
+
+\usepackage[automark, headsepline]{scrlayer-scrpage}
+\clearpairofpagestyles
+\pagestyle{scrheadings}
+\renewcommand{\chapterpagestyle}{scrheadings}
+\definecolor{egruen}{rgb}{0,0.37647,0.4}
+\ihead{
+	\parbox[b]{0.63\textwidth}{\raggedright\textcolor{egruen}{\headmark}}
+}
+\ohead{
+    \includegraphics[height=16pt]{images/logos/ego_logo.png}
+    \hspace{0.5em} % Platz zwischen den Logos
+    \includegraphics[height=20pt]{images/logos/dhbw2.jpg}
+}
+\cfoot{\textcolor{egruen}{\thepage}}
+\setlength{\headsep}{24pt} %Abstand nach Kopfzeile
+
+
+%own Packages
+\usepackage{pdfpages}
+\usepackage{pdflscape}
+\usepackage{textcomp}
+\usepackage[figure]{hypcap}
+\usepackage{makecell}
+\usepackage[htt]{hyphenat}
+\usepackage{circuitikz} %Schaltungen
+\usepackage{pgfplots} %Plots/Graphs
+\pgfplotsset{compat=newest}
+\usepackage{ulem} %doppelt unterstreichen
+\usepackage{colortbl}
+\usepackage{multirow} %Zellen vertikal verbinden Tabelle
+\usepackage{tablefootnote}
+\usepackage{upgreek}
+\usepackage{titletoc}
+\usepackage{siunitx}
+\sisetup{locale = DE}
+\usepackage{enumitem} %itemize mit eigenem abstand
+\usepackage{xurl} %URL (Umbruch)
+
+
+%Anhangsverzeichnis
+\DeclareNewTOC[%
+  owner=\jobname,
+  listname={Anhang},% Titel des Verzeichnisses
+]{atoc}% Dateierweiterung (a=appendix, toc=table of contents)
+\DeclareNewTOC[%
+  listname={Abbildungen im Anhang},% Titel des Verzeichnisses
+]{alof}% Dateierweiterung (a=appendix, lof=list of figures)
+\DeclareNewTOC[%
+  listname={Tabellen im Anhang},% Titel des Verzeichnisses
+]{alot}% Dateierweiterung (a=appendix, lot=list of tables)
+\DeclareNewTOC[%
+  listname={Listings im Anhang},% Titel des Verzeichnisses
+]{alol}% Dateierweiterung (a=appendix, lol=list of listings)
+
+%Anhang
+\makeatletter
+\newcommand*{\useappendixtocs}{%
+  \renewcommand*{\ext@toc}{atoc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=atoc}%
+  }%
+  \renewcommand*{\ext@figure}{alof}%
+  \renewcommand*{\ext@table}{alot}%
+  \addtocontents{atoc}{\protect\renewcommand{\protect\@pnumwidth}{4em}} % Passe hier die Breite an
+  \addtocontents{atoc}{\protect\renewcommand{\protect\@tocrmarg}{5em}} % Passe hier die Breite für die Kapiteltitel an (weniger = weiter nach rechts)
+}
+\newcommand*{\usestandardtocs}{%
+  \renewcommand*{\ext@toc}{toc}%
+  \scr@ifundefinedorrelax{hypersetup}{}{% damit es auch ohne hyperref funktioniert
+    \hypersetup{bookmarkstype=toc}%
+  }%
+  \renewcommand*{\ext@figure}{lof}%
+  \renewcommand*{\ext@table}{lot}%
+  \addtocontents{toc}{\protect\renewcommand{\protect\@pnumwidth}{2em}} % Passe hier die Breite an
+}
+
+\xapptocmd\appendix{%
+  %\addpart{\appendixname}
+  \useappendixtocs
+  \listofatocs %Anhangsverzeichnis
+  %\listofalofs
+  %\listofalots
+  %\listofalols %funktioniert irgendwie nicht
+}{}{}
+\makeatother
+
+\newcommand\invisiblesection[1]{%
+  \refstepcounter{section}%
+  \addcontentsline{atoc}{section}{\protect\numberline{\thesection}#1}%
+  \sectionmark{#1}}
+
+
+%Sonstige Einstellungen / eigene commands
+\renewcommand*{\chapterheadstartvskip}{\vspace*{1.5\baselineskip}}% Abstand vor Überschrift einstellen
+\renewcommand*{\autodot}{} % Entfernt den Punkt nach der Nummerierung
+
+\newcommand*{\quelleBild}[1]{\par\raggedleft\footnotesize Quelle:~#1}
+\newcommand{\refanhang}[1]{\hyperref[#1]{Anhang (Abschnitt \ref{#1})}} %Referenz z.B. "Anhang (Abschnitt A)"
+\newcommand{\circnumb}[1]{\ding{\numexpr191+#1\relax}} %Eingekreiste Zahlen 1-10
+\newcommand{\smallurl}[1]{\fontsize{7pt}{8pt}\selectfont\url{#1}} %kleiner Link (Schriftgröße, Zeilenabstand)
+\newcolumntype{P}[1]{>{\raggedright\arraybackslash}p{#1}} %Text linksbündig in Tabellen mit festerbreite durch z.b. P{4cm}
+\newcommand{\coloredul}[3][black]{
+  \begingroup
+  \definecolor{tempcolor}{HTML}{#2}
+  \setulcolor{tempcolor}
+  \ul{#3}
+  \endgroup
+}
+
+% Paket für Abkürzungen

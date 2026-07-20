@@ -1,0 +1,65 @@
+\usepackage{listings}
+
+\lstset{
+    captionpos=b, % Position der Caption (z.B. unterhalb)
+    caption=\lstname, % Text der Caption (z.B. der Dateiname)
+    basicstyle=\ttfamily\scriptsize,
+    showstringspaces=false,
+    tabsize=4,
+    breaklines=true,
+    frame=none,
+    backgroundcolor=\color{egruen!5},
+    aboveskip=20pt,
+    numbers=left,
+    numberstyle=\color{egruen}\scriptsize,
+    stepnumber=1,
+    numbersep=5pt
+}
+%Umlaute
+\lstset{literate=%
+  {Ö}{{\"O}}1
+  {Ä}{{\"A}}1
+  {Ü}{{\"U}}1
+  {ß}{{\ss}}1
+  {ü}{{\"u}}1
+  {ä}{{\"a}}1
+  {ö}{{\"o}}1
+}
+
+%own colors
+\definecolor{owndarkpurple}{HTML}{530087}
+\definecolor{owntuerkis}{HTML}{07afb8}
+\definecolor{ownorange}{HTML}{cf6c02}
+\definecolor{owndarkgreen}{HTML}{157302}
+\definecolor{owndarktuerkis}{HTML}{029c78}
+
+%Python
+\lstnewenvironment{python}[1][]{
+  \lstset{
+    language=Python,
+    keywordstyle=\color{blue},
+    morekeywords=[1]{if, else, for, in, elif, while, break, try, except, pass, as},
+    keywordstyle=[1]\color{owndarkpurple},
+    morekeywords=[2]{False, True, self, polyval, argmax, median, mean, polyfit, poly1d, append, array, linspace, subplots, scatter, plot, spines, tight\_layout, tick\_params, savefig, log, annotate, legend, grid, set\_xscale, ylim, show},
+    keywordstyle=[2]\color{blue},
+    morekeywords=[3]{cv2, sys, os, time, np, int, str, float, ESP, ESPThread, threading, serial, matplotlib, pyplot, plt, pandas, pd, CSV, numpy, Line2D, lines, backends, backend_pdf, scipy, optimize, curve\_fit, PdfPages, pdf, log\_func\_curved},
+    keywordstyle=[3]\color{owndarktuerkis},
+    stringstyle=\color{ownorange},
+    commentstyle=\color{owndarkgreen},
+    #1
+  }
+}{}
+
+%C_Code
+\lstnewenvironment{c_code}[1][]{
+  \lstset{
+    language=C,
+    keywords={unsigned, long, bool, void, int, const, CapSensor, Color, Led, float, MenuElement, SubMenu, MainMenu, Menu, VarsReactionGame, DFPlayerMini_Fast, Settings, ControlFlags, hw_timer_t, Motor, String, Temperature, HotLed, Thermocouple, Relay, SerialConnection, uint8\_t, uint16\_t,SerialConnectionManager, MeasurementManager, HeatingElement, hw\_timer\_t, false, true},
+    keywordstyle=\color{blue},
+    morekeywords=[2]{if, else, for, elif, while, break, switch, case, struct, new},
+    keywordstyle=[2]\color{owndarkpurple},
+    stringstyle=\color{ownorange},
+    commentstyle=\color{owndarkgreen},
+    #1
+  }
+}{}

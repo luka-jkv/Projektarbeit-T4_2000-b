@@ -1,0 +1,80 @@
+# LaTeX intermediate and output files
+*.acn
+*.acr
+*.alg
+*.aux
+*.bak
+*.bbl
+*.bcf
+*.blg
+*.brf
+*.bst
+*.dvi
+*.fdb_latexmk
+*.fls
+*.glg
+*.glo
+*.gls
+*.idx
+*.ilg
+*.ind
+*.ist
+*.lof
+*.log
+*.lol
+*.lot
+*.maf
+*.mtc
+*.mtc1
+*.nav
+*.nlo
+*.nls
+*.out
+*.pyg
+*.run.xml
+*.snm
+*.synctex.gz
+*.tex.backup
+*.tex~
+*.thm
+*.toc
+*.atoc
+*.vrb
+*.xdy
+*.xml
+*blx.bib
+.bak 
+.mtc
+build/
+
+# PDF and other output files
+# *.pdf
+*.dvi
+*.ps
+
+# Backup files
+*~
+*.bak
+*.sav
+
+# Editor swap/backup files
+*.swp
+*.swo
+
+# MacOS files
+.DS_Store
+
+# Windows files
+Thumbs.db
+
+# latexmk generated files
+latexmkrc
+
+# Temporary files
+tmp/
+temp/
+
+.vscode/
+
+Notizen.txt
+out/

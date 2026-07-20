@@ -1,0 +1,151 @@
+\section{Berechnung der Verstärkung des INA351CDS}
+\label{anhang:berechnungverstaerkunginstr}
+Im Folgenden wird die Gesamtverstärkung des Instrumentenverstärkers anhand der in \autoref{anhang:interneraufbauina351} dargestellten internen Schaltung des INA351CDS berechnet.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\linewidth]{images/Anhang/Instrumentenverstaerker.pdf}
+    \vspace{-0.2cm}
+    \caption{Interner Aufbau des INA351CDS \cite[S. 1 (Bezeichnungen in der Grafik ergänzt)]{INA351}}
+    \label{anhang:interneraufbauina351}
+\end{figure}
+
+Bei einem positiven Logikpegel\footnote{Der INA351CDS interpretiert eine Spannung ab +\qty{1}{\volt} über dem Potential am Anschluss \texttt{V-} als positiv \cite[S. 7]{INA351}} am \texttt{GS}-Eingang des INA351CDS oder wenn dieser Eingang frei bleibt, hat der interne Widerstand einen Wert von \qty{5.92}{\kilo\ohm} \cite[S. 20]{INA351}:
+\begin{flalign}
+    R_G = \frac{\qty{290}{\kilo\ohm}}{V - 1} = \frac{\qty{290}{\kilo\ohm}}{50 - 1} \approx \uuline{\qty{5.92}{\kilo\ohm}}
+\end{flalign}
+Im Folgenden wird die Gesamtverstärkung $V_{ges}$ der Eingangsspannung $U_{IN}$ = $U_{+IN} - U_{-IN}$ anhand der einzelnen Verstärkerstufen berechnet.
+
+Durch die Rückkopplung bei den Eingangsverstärkern $AMP1$ und $AMP2$ liegt an beiden Eingängen der Verstärker jeweils das gleiche Potential an. In \autoref{anhang:interneraufbauina351} ist das Potential an den Eingängen des $AMP1$ mit $U_{-IN}$ bezeichnet und gelb hervorgehoben, während das Potential $U_{+IN}$ an den Eingängen von $AMP2$ grün markiert ist. Daher können die Eingangsverstärkerschaltungen als unabhängige Verstärkerschaltungen betrachtet werden (siehe Abbildungen \ref{anhang:interneraufbauina351AMP1} und \ref{anhang:interneraufbauina351AMP2}).
+
+\begin{figure}[h]
+    \centering
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/Anhang/Instrumentenverstaerker_AMP1.pdf}
+        \caption{Teilschaltung AMP1}
+        \label{anhang:interneraufbauina351AMP1}
+    \end{minipage}\hfill
+    \begin{minipage}{0.4\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{images/Anhang/Instrumentenverstaerker_AMP2.pdf}
+        \caption{Teilschaltung AMP2}
+        \label{anhang:interneraufbauina351AMP2}
+    \end{minipage}
+\end{figure}
+
+Dabei handelt es sich jeweils um die Schaltung des nichtinvertierenden Verstärkers. Die Ausgangsspannung $U_{AMP1\_OUT}$ des $AMP1$ lässt sich über (\ref{gl:nichtinvamp1}) und die Ausgangsspannung $U_{AMP2\_OUT}$ des $AMP2$ über (\ref{gl:nichtinvamp2}) berechnen \cite[S. 515]{tietzeschenk}.
+\begin{flalign}
+    U_{AMP1\_OUT} &= \Big(1 + \frac{\qty{145}{\kilo\ohm}}{R_G}\Big) \cdot (U_{-IN} - U_{+IN}) \label{gl:nichtinvamp1} \\
+    U_{AMP2\_OUT} &= \Big(1 + \frac{\qty{145}{\kilo\ohm}}{R_G}\Big) \cdot (U_{+IN} - U_{-IN}) \label{gl:nichtinvamp2}
+\end{flalign}
+
+Der Strom $I_{RG}$ durch den Widerstand $R_G$ lässt sich anhand der Spannungen $U_{+IN}$ und $U_{-IN}$, aber auch anhand der Spannungen $U_{AMP1\_OUT}$ und $U_{AMP2\_OUT}$ berechnen.
+\begin{flalign}
+    I_{RG} &= \frac{U_{-IN} - U_{+IN}}{R_G} \label{gl:irg1} \\
+           &= \frac{U_{AMP1\_OUT} - U_{AMP2\_OUT}}{R_G + 2 \cdot \qty{145}{\kilo\ohm}} \label{gl:irg2}
+\end{flalign}
+
+Durch Gleichsetzen von (\ref{gl:irg1}) und (\ref{gl:irg2}) und anschließender Multiplikation mit $-1$ zur Vorbereitung weiterer Berechnungen ergibt sich der folgende Ausdruck:
+\begin{flalign}
+    U_{AMP2\_OUT} - U_{AMP1\_OUT} = \Big(1 + \frac{2 \cdot \qty{145}{\kilo\ohm}}{R_G}\Big) \cdot (U_{+IN} - U_{-IN}) \label{gl:am2-am1}
+\end{flalign}
+
+Da die vier Widerstände der dritten Verstärkerstufe, dem Subtrahierer mit dem $AMP3$, alle gleich groß sind, liegt dessen Verstärkung bei $1$. Somit vereinfacht sich dessen Übertragungsfunktion in Bezug zur Referenzspannung $U_{REF}$ zu \cite{e_komp_subtrahierer}:
+\begin{flalign}
+    U_{AMP3\_OUT} = U_{AMP2\_OUT} - U_{AMP1\_OUT} + U_{REF}
+\end{flalign}
+
+Für $U_{AMP2\_OUT} - U_{AMP1\_OUT}$ kann der Ausdruck aus (\ref{gl:am2-am1}) eingesetzt werden.
+\begin{flalign}
+    U_{AMP3\_OUT} = \Big(1 + \frac{2 \cdot \qty{145}{\kilo\ohm}}{R_G}\Big) \cdot (U_{+IN} - U_{-IN}) + U_{REF} \label{gl:gesamtuebertragung}
+\end{flalign}
+
+Die Übertragungsfunktion des Instrumentenverstärkers (\ref{gl:gesamtuebertragung}) kann umgeformt werden, um die Gesamtverstärkung $V_{ges}$ zu erhalten.
+\begin{flalign}
+    V_{ges} &= \frac{U_{OUT}}{U_{IN}} = \frac{U_{AMP3\_OUT} - U_{REF}}{U_{+IN} - U_{-IN}} = 1 + \frac{2 \cdot \qty{145}{\kilo\ohm}}{R_G} \approx \uuline{50}
+\end{flalign}
+%Nach https://www.youtube.com/watch?v=vfsSu12kl2E
+%ggf. Quelle Tietze Schenk S.1011
+
+
+
+
+\newpage
+\section{Erläuterung des Chopper-Verfahrens}
+\label{anhang:choppererklaerung}
+
+In \autoref{anhang:blockschaltchopper} ist die Schaltung eines Verstärkers mit dem Chopper-Verfahren dargestellt. Der gestrichelt umrandete Schaltungsteil in der Abbildung dient als Grundlage für die folgende Erklärung des Chopper-Verfahrens.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\linewidth]{images/Anhang/Chopper_Schaltung.pdf}
+    \vspace{-0.6cm}
+    \caption{Blockschaltbild eines Verstärkers mit dem Chopper-Verfahren (Goldberg-Konfiguration) \cite[S. 1, Figure 1]{chopper}}
+    \label{anhang:blockschaltchopper}
+\end{figure}
+
+Das Funktionsprinzip des Verstärkers lässt sich in folgende Schritte unterteilen\footnote{Die Diagramme mit einem Beispielsignal zu jedem Schritt wurden mithilfe der Matplotlib-Bibliothek erstellt. Zur Überprüfung der Signalverläufe wurde die in Schaltung aus \autoref{anhang:blockschaltchopper} in LTspice simuliert.}:
+\begin{enumerate}
+    \item Das Eingangssignal $e_{in}$ wird zum in \autoref{anhang:blockschaltchopper} gestrichelt umrandeten Abschnitt geleitet, in welchem das Chopper-Verfahren angewendet wird. Der davor geschaltete Tiefpassfilter aus $R_2$ und $C_2$ begrenzt die Bandbreite des Eingangssignals. \cite[S. 1]{chopper}\\
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \captionsetup{skip=0pt}
+        \includegraphics[width=\textwidth]{images/Anhang/Plots_Chopper/Plot_Schritt1.pdf}
+        \captionof{figure}{Zeitbereich und Frequenzspektrum des Eingangssignals $e_{in}$. Als Beispielsignal für $e_{in}$ ist eine Gleichspannung von \qty{0.2}{\volt} mit 1/f-Rauschen dargestellt.}
+    \end{minipage}\\
+
+    \item Das Eingangssignal wird \enquote{zerhackt}, was dem Verfahren seinen Namen gibt. Dies geschieht durch schnelles Umschalten zwischen dem niederfrequenten Eingangssignal und dem Massepotential. Der interne Oszillator steuert hierfür den Schalter $S1$, wodurch über dem Schalter ein Rechtecksignal mit der Amplitude des Eingangs\-sig\-nals entsteht. Dieses Rechtecksignal wird über den Hochpass aus $C_3$ und $R_4$ zum Eingang des Verstärkers $AMP2$ geleitet. \cite[S. 2]{chopper}\\
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \captionsetup{skip=0pt}
+        \includegraphics[width=\textwidth]{images/Anhang/Plots_Chopper/Plot_Schritt2.pdf}
+        \captionof{figure}{Zeitbereich und Frequenzspektrum des \enquote{zerhackten} Signals am Eingang des Verstärkers $AMP2$. Bei diesem Beispiel werden die Schalter mit einer Frequenz von \qty{100}{\kilo\hertz} angesteuert.}
+    \end{minipage}\\
+
+    \item Das Rechtecksignal wird durch den Verstärker $AMP2$ verstärkt \cite[S. 2]{chopper}.\\% Eher niederfrequente Störungen wie 1/f-Rauschen werden hierbei nicht verstärkt.\\
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \captionsetup{skip=0pt}
+        \includegraphics[width=\textwidth]{images/Anhang/Plots_Chopper/Plot_Schritt3.pdf}
+        \captionof{figure}{Zeitbereich und Frequenzspektrum des verstärkten Signals am Ausgang des Verstärkers $AMP2$, der bei diesem Beispiel eine Verstärkung von $20$ aufweist.}
+    \end{minipage}\\
+
+    \item Mithilfe des Schalters $S2$, der synchron zum Schalter $S1$ angesteuert wird, wird das verstärkte Rechtecksignal am Ausgang des Verstärkers $AMP2$ wieder auf das Massepotential bezogen. \cite[S. 2]{chopper}\\
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \captionsetup{skip=0pt}
+        \includegraphics[width=\textwidth]{images/Anhang/Plots_Chopper/Plot_Schritt4.pdf}
+        \captionof{figure}{Zeitbereich und Frequenzspektrum des auf Masse bezogenen Signals am Schalter $S2$.}
+    \end{minipage}\\
+
+    \item Das auf das Massepotential bezogene Rechtecksignal wird mithilfe des Tiefpasses aus $R_5 + R_6$ und $C_5$ gefiltert. Dieser weist eine sehr geringe Grenzfrequenz auf, normalerweise den Bruchteil von einem Hertz. Dadurch wird die Halbwelle mit Massepotential überbrückt und es entsteht eine kontinuierliche Gleichspannung ohne Artefakte des Rechtecksignals. Die Gleichspannung beträgt durch diesen Schritt die Hälfte der Amplitude des auf Masse bezogenen Rechtecksignals. \cite[S. 2]{chopper}\\
+    \begin{minipage}[t]{\linewidth}
+        \centering
+        \captionsetup{skip=0pt}
+        \includegraphics[width=\textwidth]{images/Anhang/Plots_Chopper/Plot_Schritt5.pdf}
+        \captionof{figure}{Zeitbereich und Frequenzspektrum der Gleichspannung am Tiefpass aus $R_5 + R_6$ und $C_5$. Die effektive Verstärkung des Eingangssignals beträgt in diesem Beispiel $10$.}
+    \end{minipage}\\
+
+    %\item Die Gleichspannung gelangt über den \ac{DC}-Verstärker $AMP1$ zum Ausgang der gesamten Schaltung. %Der invertierende Eingang des $AMP1$ ist über einen Hochpass aus $C_1$ und $R_1$ mit dem Eingangssignal $e_{in}$ verbunden. Der Hochpass sorgt dafür, dass der niederfrequente Anteil von $e_{in}$ komplett am Schaltungsteil mit dem $AMP2$ anliegt.
+    %Letzte Erklärung korrekt?
+    %verhindert, dass der Gleichstromanteil an AMP1 anliegt, warum?
+\end{enumerate}
+
+
+
+
+%Offene Punkte
+
+%3. Wo genau werden Störungen unterdrückt? Hochpass?
+%+eher weniger verstärkt als nicht verstärkt
+
+%Antwort im Tietze Schenk?
+
+%1. 6. Warum Aufteilung in hoch- und niederfrequent?
+%6. Letzter Verstärker (DC)
+%6. Was ist an e_{OUT} zu erwarten?
+%=> nur den gestrichelten Teil erklären???
+
+
+%was machen die Dioden?
+
