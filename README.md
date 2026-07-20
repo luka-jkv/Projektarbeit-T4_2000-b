@@ -1,6 +1,6 @@
-# T4_2000_a_TINF24B3_Luka_Jakovleski - Project Work
+# T4_2000_b_TINF24B3_Luka_Jakovleski - Project Work
 
-This repository contains the LaTeX source files for my T4_2000 A project work. The goal is to develop a software-kiosk, which allows users to maintain und install their software more easily without having access to the bitbucket repository.
+This repository contains the LaTeX source files for my T4_2000 b project work. The goal is to write a script for a Shelly Plug Gen3, which will send its current powerusage in kW through BLE-Advertisements to the nearest BLE-scanner. It also should make itself anavailble, so no one can manipulate the plug without resetting it, rendering it useless.
 
 ## Project Overview
 
